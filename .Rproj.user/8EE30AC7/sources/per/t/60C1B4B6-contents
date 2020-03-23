@@ -1,0 +1,64 @@
+#scripts for ann_modelling here
+
+#load datasets
+concrete <- read.csv("concrete.csv")
+str(concrete)
+
+normalize <- function(x){
+  return((x-min(x))/(max(x)-min(x)))
+}
+
+concrete_norm <- as.data.frame(lapply(concrete,normalize))
+summary(concrete_norm$strength)
+summary(concrete$strength)
+
+#divide data into train and test 
+#75% data for train & 25% data for test
+concrete_train <- concrete_norm[1:773,]
+concrete_test <- concrete_norm[774:1030,]
+
+#install.packages("neuralnet")
+library(neuralnet)
+
+#without hidden layers
+concrete_model <- neuralnet(strength ~ cement + slag
+                            + ash + water + superplastic + coarseagg + fineagg + age, data = concrete_train)
+plot(concrete_model)
+
+
+model_results <- compute(concrete_model, concrete_test[1:8])
+predicted_strength <- model_results$net.result
+cor(predicted_strength, concrete_test$strength)
+# rm(concrete_model2)
+
+saveRDS(concrete_model, "modelxHid.rds")
+
+# model1 <- readRDS("modelxHid.rds")
+# plot(model1)
+# mod_result <- compute(model1, concrete_test[1:8])
+# pred_strength <- mod_result$net.result
+# cor(pred_strength, concrete_test$strength)
+
+
+#with 5 hidden layers
+concrete_model2 <- neuralnet(strength ~ cement + slag + ash + water + superplastic + coarseagg + fineagg + age,
+                             data = concrete_train, hidden = 5)
+plot(concrete_model2)
+
+model_results2 <- compute(testmodel, concrete_test[1:8])
+model_results2
+predicted_strength2 <- model_results2$net.result
+cor(predicted_strength2, concrete_test$strength)
+saveRDS(concrete_model2, "modelhidLay.rds")
+
+# testmodel <- readRDS("modelhidLay.rds")
+# model1
+# plot(model1)
+
+#plot actual and predicted strength
+plot(predicted_strength2, type = "o", col = "red", xlim=c(0,50))
+lines(concrete_test$strength, type = "o", col = "blue", xlim=c(0,50))
+legend("topleft", c("Actual", "Predicted"), col = c("blue", "red"), lty = 1)
+
+#library - neuralnet, shiny
+#source - ann_scripts, ann_test_scripts#scripts for ann_modelling here

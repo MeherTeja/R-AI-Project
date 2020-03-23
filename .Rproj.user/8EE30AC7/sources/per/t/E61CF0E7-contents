@@ -1,0 +1,79 @@
+# Function to normalize data
+
+normalize <- function(x){
+  return ((x-min(x)) / (max(x)-min(x)))
+}
+
+normalizeView <- function(x){
+  normalized_value <- (x-min(x)) / (max(x)-min(x))
+  round <- round(normalized_value,2)
+  return(round)
+}
+
+normdataDisp <- function(x){
+  concrete <- read.csv(x)
+  concrete_norm <- as.data.frame(lapply(concrete,normalizeView))
+  return(concrete_norm)
+}
+
+denormalize = function(x){
+  return (x*(max(x)-min(x))+min(x))
+}
+
+# Return normalize datasets when called in app.R
+normdatasets <- function(x){
+  concrete <- read.csv(x)
+  concrete_norm <- as.data.frame(lapply(concrete,normalize))
+  return(concrete_norm)
+}
+
+# Return raw datasets
+rawdatasets <- function(x){
+  concrete <- read.csv(x)
+  return(concrete)
+}
+###############
+# Get test datasets
+testdata <- function(concrete_norm){
+  concrete_train <- concrete_norm[1:773,]
+  concrete_test <- concrete_norm[774:1030,]
+  return(concrete_test)
+}
+
+# Predicted dataset
+predsets <- function(concrete_norm, model_rds){
+  concrete_train <- concrete_norm[1:773,]
+  concrete_test <- concrete_norm[774:1030,]
+  model <- readRDS(model_rds)
+  mod_result <- compute(model, concrete_test[1:8])
+  pred_strength <- mod_result$net.result
+  return(pred_strength)
+}
+
+# Get accuracy
+getAccuracy <- function(concrete_norm, model_rds){
+  concrete_train <- concrete_norm[1:773,]
+  concrete_test <- concrete_norm[774:1030,]
+  model <- readRDS(model_rds)
+  mod_result <- compute(model, concrete_test[1:8])
+  pred_strength <- mod_result$net.result
+  acc <- cor(pred_strength, concrete_test$strength)
+  return(acc)
+}
+
+predbyInput <- function(rawDT, model, newdata){
+  
+  data <- rbind(rawDT,newdata)
+  write.csv(data,"tempDT.csv")
+  combineDT <- read.csv("tempDT.csv")
+  dataNorm <- as.data.frame(lapply(combineDT, normalize))
+  result <- compute(model, dataNorm[774:1031, ])
+  normResult <- data.frame(dataNorm)
+  normResult[1031,10] <- tail(result$net.result,1)
+  write.csv(normResult,"resultDataFrame.csv")
+  return(tail(result$net.result,1))
+}
+
+# 
+# rawdatasets("concrete.csv")
+# normdatasets("concrete.csv")

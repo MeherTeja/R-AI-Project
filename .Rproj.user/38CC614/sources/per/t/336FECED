@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563997405752.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1254535175",
+    "id" : "336FECED",
+    "lastKnownWriteTime" : 1563997579,
+    "last_content_update" : 1563997579833,
+    "path" : "C:/Users/Asus/Desktop/AIProject-master/AIProject-master-latesttttttttttttttt/AIProject-master/app.R",
+    "project_path" : "app.R",
+    "properties" : {
+        "cursorPosition" : "9,15",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

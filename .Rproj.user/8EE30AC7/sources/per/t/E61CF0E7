@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1564035199893.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2527716956",
+    "id" : "E61CF0E7",
+    "lastKnownWriteTime" : 1564038870,
+    "last_content_update" : 1564038870130,
+    "path" : "C:/Users/Atiqah/Desktop/AIProject/ann_scripts.R",
+    "project_path" : "ann_scripts.R",
+    "properties" : {
+        "cursorPosition" : "13,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

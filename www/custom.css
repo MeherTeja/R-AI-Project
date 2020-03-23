@@ -1,0 +1,23 @@
+.main-header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+
+.skin-blue .main-sidebar{
+	border: 5px solid black;
+}
+
+.main-sidebar .sidebar .sidebar-menu a:hover{
+
+	background-color: navy;
+	color: white;
+}
+
+.main-sidebar .sidebar .sidebar-menu .active a{
+	background-color: blue;
+	color: white;
+}
+
+
