@@ -6,7 +6,7 @@ This project is the assignment for the course Artificial Intelligence.
 # Setup
 Clone or download the repository.
 ```
-$ git clone https://github.com/tanlitung388/R-AI-Project.git
+$ git clone https://github.com/tanlitung/R-AI-Project.git
 $ cd R-AI-Project
 ```
 # Main Program
